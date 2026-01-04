@@ -1,11 +1,16 @@
-resource "aws_instance" "this" {
-  count                  = 3
+resource "aws_instance" "expense" {
+  count = length(var.instances)
+  #count                  = 3
   ami                    = var.ami_id
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   instance_type          = var.instance_type
-  tags = {
-    Name = var.instances[count.index]
-  }
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = var.instances[count.index]
+    }
+  )
 }
 
 resource "aws_security_group" "allow_tls" {

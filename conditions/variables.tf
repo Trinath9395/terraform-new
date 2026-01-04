@@ -4,9 +4,8 @@ variable "ami_id" {
   description = "This is Ec2-ami-id"
 }
 
-variable "instances" {
-  type = list(string)
-  default = ["mysql", "backend", "frontend"]
+variable "environemt" {
+  default = "dev"
 }
 
 variable "instance_type" {
@@ -15,15 +14,15 @@ variable "instance_type" {
   description = "instance-type"
 }
 
-/* variable "ec2_tags" {
-  type = map
+variable "ec2_tags" {
+  type = map(any)
   default = {
     Project    = "expense"
     Component  = "backend"
     Environemt = "dev"
     Name       = "expense-backend-dev"
   }
-} */
+}
 
 variable "from_port" {
   type    = number
@@ -44,21 +43,5 @@ variable "sg_tags" {
   type = map(any)
   default = {
     Name = "expense-backend-dev"
-  }
-}
-
-variable "zone_id" {
-  default = "Z051115728XRIO19KLDP8"
-}
-
-variable "domain_name" {
-  default = "tridev.online"
-}
-
-variable "common_tags" {
-  type = map 
-  default = {
-    Project = "expense"
-    Environemt = "dev"
   }
 }
